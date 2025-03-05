@@ -1,0 +1,69 @@
+# Customer Segmentation Project
+
+## Overview
+
+This project aims to identify segments of the population that form the core customer base for a mail-order sales company in Germany. Unsupervised learning techniques are applied to demographic data to cluster the general population and then analyze how the company's customers fit into these clusters. The goal is to identify over-represented clusters in the customer data, which can then be used for targeted marketing campaigns.
+
+## Data
+
+The project utilizes the following datasets provided by Bertelsmann Arvato Analytics:
+
+-   `Udacity_AZDIAS_Subset.csv`: Demographics data for the general population of Germany (891211 persons x 85 features).
+-   `Udacity_CUSTOMERS_Subset.csv`: Demographics data for customers of a mail-order company (191652 persons x 85 features).
+-   `Data_Dictionary.md`: Detailed information about the features in the datasets.
+-   `AZDIAS_Feature_Summary.csv`: Summary of feature attributes for demographics data (85 features x 4 columns).
+
+## Dependencies
+
+-   numpy
+-   pandas
+-   matplotlib
+-   seaborn
+-   scikit-learn
+-   re
+-   collections
+
+To install the required packages, you can use pip:
+
+
+## Code Structure
+
+The project is implemented in a Jupyter Notebook (`.ipynb`) and consists of the following main steps:
+
+1.  **Data Loading**: Loads the demographics data and feature summary file into pandas DataFrames.
+2.  **Preprocessing**:
+    -   **Missing Data Assessment**: Identifies and converts missing value codes to NaNs. Assesses missing data in each column and row, removing outlier columns with a high proportion of missing values.
+    -   **Feature Selection and Re-Encoding**: Re-encodes categorical features (binary and multi-level) and engineers mixed-type features.
+3.  **Feature Transformation**:
+    -   **Feature Scaling**: Applies feature scaling using StandardScaler after imputing missing values.
+    -   **Dimensionality Reduction**: Performs PCA to reduce the dimensionality of the data while retaining a significant amount of variance.
+    -   **Principal Component Interpretation**: Interprets the weight of each variable on the first few principal components.
+4.  **Clustering**:
+    -   **Clustering Application**: Applies k-means clustering to the PCA-transformed data to group the general population into clusters.
+    -   **Customer Data Application**: Applies the same preprocessing and transformation steps to the customer data and maps it onto the clusters.
+    -   **Comparison**: Compares the cluster distributions of the customer data and the general population data to identify over-represented and under-represented clusters.
+5.  **Cleaning Function**: Creates a function that can repeat the cleaning steps.
+
+## Usage
+
+1.  Ensure that all the required libraries are installed.
+2.  Place the data files (`Udacity_AZDIAS_Subset.csv`, `Udacity_CUSTOMERS_Subset.csv`, `AZDIAS_Feature_Summary.csv`) in the same directory as the Jupyter Notebook.
+3.  Open the Jupyter Notebook (`.ipynb`) in JupyterLab or Jupyter Notebook.
+4.  Run the notebook cells sequentially to perform the analysis.
+
+## Key Steps and Decisions
+
+-   Missing values are imputed using the most frequent strategy via `SimpleImputer`.
+-   Feature scaling is performed using `StandardScaler`.
+-   PCA is used for dimensionality reduction, retaining 30 components.
+-   K-means clustering is applied using `MiniBatchKMeans` to handle the large dataset size.
+-   Categorical feature 'OST\_WEST\_KZ' is re-encoded from 'W' and 'O' to '0' and '1'.
+-   Mixed-type features 'PRAEGENDE\_JUGENDJAHRE' and 'CAMEO\_INTL\_2015' are engineered into new variables.
+
+## Findings
+
+The project identifies clusters that are over-represented and under-represented in the customer data compared to the general population. This analysis provides insights into the characteristics of the mail-order company's target audience. For instance, cluster 6 is overrepresented which consists of families with a longer average residence duration and inclination towards cultural and familial attributes.
+
+## Contributing
+
+Contributions to this project are welcome. Please fork the repository, make your changes, and submit a pull request.
